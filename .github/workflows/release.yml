@@ -42,3 +42,17 @@ jobs:
       run: |
         docker build -t my-microservice:${{ github.run_number }}-${{ env.GIT_COMMIT }} .
       # docker push my-docker-repo/my-microservice:${{ github.run_number }}-${{ env.GIT_COMMIT }}
+
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Changes in this release:
+          - Build version: ${{ github.run_number }}
+          - Git commit: ${{ env.GIT_COMMIT }}
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
