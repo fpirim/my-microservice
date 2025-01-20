@@ -25,7 +25,8 @@ jobs:
       run: echo "GIT_COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
     - name: Build and Deploy
-      run: mvn clean install deploy scm:tag -Drevision=${{ github.run_number }}_${{ env.GIT_COMMIT }}
+      run: mvn clean install scm:tag -Drevision=${{ github.run_number }}_${{ env.GIT_COMMIT }}
+      # run: mvn clean install deploy scm:tag -Drevision=${{ github.run_number }}_${{ env.GIT_COMMIT }}
       
     - name: Dockerize
       run: |
