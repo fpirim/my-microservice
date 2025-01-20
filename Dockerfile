@@ -1,4 +1,4 @@
-FROM openjdk:21-jre-slim
+FROM openjdk:21-jdk
 
 # Set the working directory
 WORKDIR /app
