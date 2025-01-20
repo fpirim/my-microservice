@@ -1,0 +1,33 @@
+name: CD - Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+        cache: maven
+
+    - name: Get short Git commit hash
+      id: commit
+      run: echo "GIT_COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+    - name: Build and Deploy
+      run: mvn clean install deploy scm:tag -Drevision=${{ github.run_number }}_${{ env.GIT_COMMIT }}
+      
+    - name: Dockerize
+      run: |
+        docker build -t my-microservice:${{ github.run_number }}-${{ env.GIT_COMMIT }} .
+      # docker push my-docker-repo/my-microservice:${{ github.run_number }}-${{ env.GIT_COMMIT }}
