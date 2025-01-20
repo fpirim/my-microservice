@@ -38,10 +38,10 @@ jobs:
       run: mvn clean install scm:tag -Drevision=${{ github.run_number }}_${{ env.GIT_COMMIT }}
       # run: mvn clean install deploy scm:tag -Drevision=${{ github.run_number }}_${{ env.GIT_COMMIT }}
       
-    - name: Dockerize
-      run: |
-        docker build -t my-microservice:${{ github.run_number }}-${{ env.GIT_COMMIT }} .
-      # docker push my-docker-repo/my-microservice:${{ github.run_number }}-${{ env.GIT_COMMIT }}
+#    - name: Dockerize
+#      run: |
+#        docker build -t my-microservice:${{ github.run_number }}-${{ env.GIT_COMMIT }} .
+#      # docker push my-docker-repo/my-microservice:${{ github.run_number }}-${{ env.GIT_COMMIT }}
 
     - name: Create GitHub Release
       uses: actions/create-release@v1
