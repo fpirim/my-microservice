@@ -11,6 +11,12 @@
   <name>my-microservice</name>
   <url>http://maven.apache.org</url>
   
+  <scm>
+    <connection>scm:git:https://github.com/fpirim/my-microservice.git</connection>
+    <developerConnection>scm:git:git@github.com:fpirim/my-microservice.git</developerConnection>
+    <url>https://github.com/fpirim/my-microservice</url>    
+  </scm>
+
   <properties>
     <!-- Default revision if not passed from CI -->
     <revision>0-SNAPSHOT</revision>
